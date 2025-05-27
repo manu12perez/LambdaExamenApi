@@ -31,14 +31,14 @@ namespace LambdaExamenApi.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(Pelicula pelicula)
         {
-            await this.repo.CreatePeliculaAsync(pelicula.Genero, pelicula.Titulo, pelicula.Nacionalidad, pelicula.Actores, pelicula.Duracion, pelicula.Precio, pelicula.Youtube);
+            await this.repo.CreatePeliculaAsync(pelicula.Genero, pelicula.Titulo, pelicula.Nacionalidad, pelicula.Argumento, pelicula.Actores, pelicula.Duracion, pelicula.Precio, pelicula.Youtube);
             return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Edit(int id, [FromBody] Pelicula pelicula)
         {
-            await this.repo.UpdatePeliculaAsync(pelicula.IdPelicula, pelicula.Genero, pelicula.Titulo, pelicula.Nacionalidad, pelicula.Actores, pelicula.Duracion, pelicula.Precio, pelicula.Youtube);
+            await this.repo.UpdatePeliculaAsync(pelicula.IdPelicula, pelicula.Genero, pelicula.Titulo, pelicula.Nacionalidad, pelicula.Argumento, pelicula.Actores, pelicula.Duracion, pelicula.Precio, pelicula.Youtube);
             return Ok();
         }
 

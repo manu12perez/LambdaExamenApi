@@ -1,7 +1,10 @@
 using LambdaExamenApi.Data;
+using LambdaExamenApi.Helpers;
+using LambdaExamenApi.Models;
 using LambdaExamenApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace LambdaExamenApi;
 
@@ -19,7 +22,9 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         /*********************************************************************************************/
-        string connectionString = Configuration.GetConnectionString("MySql");
+        string secretJson = HelperSecretManager.GetSecretAsync().GetAwaiter().GetResult();
+        SecretsModel secrets = JsonConvert.DeserializeObject<SecretsModel>(secretJson);
+        string connectionString = secrets.MySql;
         services.AddTransient<RepositoryPeliculas>();
         services.AddDbContext<PeliculasContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
         services.AddCors(options =>

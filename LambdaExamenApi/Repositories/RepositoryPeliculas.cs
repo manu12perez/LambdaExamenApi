@@ -28,13 +28,14 @@ namespace LambdaExamenApi.Repositories
             return await this.context.Peliculas.MaxAsync(x => x.IdPelicula) + 1;
         }
 
-        public async Task CreatePeliculaAsync(string genero, string titulo, string nacionalidad, string actores, int duracion, int precio, string youtube)
+        public async Task CreatePeliculaAsync(string genero, string titulo, string nacionalidad, string argumento, string actores, int duracion, int precio, string youtube)
         {
             Pelicula pelicula = new Pelicula();
             pelicula.IdPelicula = await this.GetMaxIdPeliculaAsync();
             pelicula.Genero = genero;
             pelicula.Titulo = titulo;
             pelicula.Nacionalidad = nacionalidad;
+            pelicula.Argumento = argumento;
             pelicula.Actores = actores;
             pelicula.Duracion = duracion;
             pelicula.Precio = precio;
@@ -43,12 +44,13 @@ namespace LambdaExamenApi.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public async Task UpdatePeliculaAsync(int idPelicula, string genero, string titulo, string nacionalidad, string actores, int duracion, int precio, string youtube)
+        public async Task UpdatePeliculaAsync(int idPelicula, string genero, string titulo, string nacionalidad, string argumento, string actores, int duracion, int precio, string youtube)
         {
             Pelicula pelicula = await this.FindPelciulaAsync(idPelicula);
             pelicula.Genero = genero;
             pelicula.Titulo = titulo;
             pelicula.Nacionalidad = nacionalidad;
+            pelicula.Argumento = argumento;
             pelicula.Actores = actores;
             pelicula.Duracion = duracion;
             pelicula.Precio = precio;
